@@ -1,7 +1,6 @@
 
-### 1. previous output .nc ->  prepare 3dvar directory
+### 1. ICs .nc ->  prepare 3dvar directory
 ### 2. 3dvar
-### 3pre. (optional) link 3dvar output to input_folder
 ### 3. generate ICs .dat (currently in MIT chain preproc: IC_files_gen.py)
 ### 4. run MIT
 ### 5. MIT output .dat -> .nc (already in MIT chain postproc: netcdf_convert.py)
