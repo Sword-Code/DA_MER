@@ -1,1 +1,1 @@
-bisogna metterci la data %Y%m%d-%H:%M:%S dell'assimilazione in corso
+20230101-00:00:00
