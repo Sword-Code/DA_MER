@@ -1,9 +1,10 @@
 
-# 1. symbolic link to biological .nc files
+# 1. symbolic link to BGC .nc files
 # 2. prepare sat file
 # 3. compute misfits
 # 4. symbolic link to EOFs
-# 5. create file containing date (for launcher step 5)?
+
+. setup.sh
 
 #0 
 # get 3dvar meshmask.nc and other static files (horizontal correlations)
@@ -15,10 +16,10 @@
 bash satellite.sh
 
 #3
-#do we already have a script?
+#get script from anna
 
 #4
-ln -sf ...
+#ln -sf ...
 
 
 
