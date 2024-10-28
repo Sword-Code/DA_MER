@@ -107,7 +107,7 @@ def gen_sat_files(
     Mask2 = mask(outmaskfile)
     
     for time in TIMELIST[rank::nranks]:
-        filename=time +suffix+ ".nc"
+        filename=time[:8] +suffix+ ".nc"
         inputfile = INPUTDIR + filename
         outputfile= OUTPUTDIR + filename
         B = DataExtractor(Mask_bitsea1, inputfile, satvar).values
