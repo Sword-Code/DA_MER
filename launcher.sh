@@ -29,5 +29,5 @@ bash 3dvar2ICs_$PARALLEL.sh
 # MIT chain model step
 
 ### 5
-bash output_dat2nc_$PARALLEL.sh
+# MIT chain postproc step
 
