@@ -2,7 +2,7 @@ import setup
 
 class Settings(setup.Settings):
     IC_file="/leonardo_work/OGS23_PRACE_IT_0/sspada00/3dvar_MER_T1/MER_3dvar/temp/IC_test/P{}l.nc"
-    misfit_file="/leonardo_work/OGS23_PRACE_IT_0/sspada00/3dvar_MER_T1/MER_3dvar/temp/misfit/chl_mis.nc"
+    misfit_file="/leonardo_work/OGS23_PRACE_IT_0/sspada00/3dvar_MER_T1/MER_3dvar/wrkdir/chl_mis.nc"
 
     sat_var='CHL'
     sat_lon_var='lon'

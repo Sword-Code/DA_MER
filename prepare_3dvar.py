@@ -20,7 +20,6 @@ import create_misfit
 satellite.main()
 
 #3
-# it now takes month 01. this must be improved.
 create_misfit.main() 
 
 #4
