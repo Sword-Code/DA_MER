@@ -18,5 +18,5 @@ class Settings(setup.Settings):
     
     def __init__(self):
         super().__init__()
-        sat_file=f"/leonardo_work/OGS23_PRACE_IT_0/sspada00/3dvar_MER_T1/MER_3dvar/temp/1_24/{self.date}_cmems_obs-oc_med_bgc-plankton_myint_l3-multi-1km_P1D.nc"
-        var_file=f'/leonardo_work/OGS23_PRACE_IT_0/sspada00/3dvar_MER_T1/MER_3dvar/temp/SAT_VAR/var2D.{self.month}.nc'
+        self.sat_file=f"/leonardo_work/OGS23_PRACE_IT_0/sspada00/3dvar_MER_T1/MER_3dvar/temp/1_24/{self.date}_cmems_obs-oc_med_bgc-plankton_myint_l3-multi-1km_P1D.nc"
+        self.var_file=f'/leonardo_work/OGS23_PRACE_IT_0/sspada00/3dvar_MER_T1/MER_3dvar/temp/SAT_VAR/var2D.{self.month}.nc'

@@ -6,8 +6,8 @@ class Settings:
     varlistfile='DAvars.txt'
     
     def __init__(self):
-        with open(DAtime_file, 'r') as f:
+        with open(self.DAtime_file, 'r') as f:
             line=f.readline()
-        month=line[2:4]
-        date=line[:8]
-        datetime=line[:17]
+        self.month=line[4:6]
+        self.date=line[:8]
+        self.datetime=line[:17]
