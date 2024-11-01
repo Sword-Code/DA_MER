@@ -4,7 +4,11 @@
 # 3. compute misfits
 # 4. symbolic link to EOFs
 
-. setup.sh
+from setup import Settings
+
+import satellite
+
+import create_misfit
 
 #0 
 # get 3dvar meshmask.nc and other static files (horizontal correlations)
@@ -13,10 +17,11 @@
 #ln -sf ...
 
 #2
-bash satellite.sh
+satellite.main()
 
 #3
-bash misfit.sh
+# it now takes month 01. this must be improved.
+create_misfit.main() 
 
 #4
 #ln -sf ...
