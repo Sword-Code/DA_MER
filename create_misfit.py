@@ -15,7 +15,6 @@ def misfit(settings):
         sat_lon=sat_nc[settings.sat_lon_var][:]
         sat_lat=sat_nc[settings.sat_lat_var][:]
     chl=np.squeeze(chl)
-    chl.fill_value=settings.fillValue
 
     for i in range(1,5):
         filename=settings.IC_file.format(i)
@@ -24,7 +23,6 @@ def misfit(settings):
             ic=ic_nc[settings.IC_var.format(i)][...,0,:,:]
         ic=np.squeeze(ic)
         chl-=ic
-    chl.data[chl.mask]=settings.fillValue
 
     print('reading variance file: '+settings.var_file)
     with nc.Dataset(settings.var_file,'r') as  var_nc:
@@ -32,9 +30,13 @@ def misfit(settings):
     var=np.squeeze(var)
     std=np.sqrt(var)
     std[std>settings.max_std]=settings.max_std
-    std.mask=np.logical_and(std.mask, chl.mask)
+    std.mask=np.logical_or(std.mask, chl.mask)
     std.data[std.mask]=settings.fillValue
     std.fill_value=settings.fillValue
+    
+    chl.mask=std.mask
+    chl.data[chl.mask]=settings.fillValue
+    chl.fill_value=settings.fillValue
 
     n_lat,n_lon=chl.shape
 
