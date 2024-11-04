@@ -1,14 +1,11 @@
  
 import netCDF4 as nc
-from scipy.io import netcdf_file
 import os
 import numpy as np
 
 from create_misfit_setup import Settings
 
 def misfit(settings):
-    transpose=False
-    
     print('reading sat file: '+settings.sat_file)
     with nc.Dataset(settings.sat_file, "r") as sat_nc:
         chl=sat_nc[settings.sat_var][:]
@@ -41,30 +38,18 @@ def misfit(settings):
     n_lat,n_lon=chl.shape
 
     print('writing misfit file: '+settings.misfit_file)
-    # with nc.Dataset(settings.misfit_file, 'w) as mis_nc:
-    with netcdf_file(settings.misfit_file, 'w') as mis_nc:
+    with nc.Dataset(settings.misfit_file, 'w', format='NETCDF3_CLASSIC') as mis_nc:
         mis_nc.createDimension("time", 1)
         mis_nc.createDimension("depth", 1)
         mis_nc.createDimension("lon", n_lon)
         mis_nc.createDimension("lat", n_lat)
         
-        time=mis_nc.createVariable("time", np.float32, ("time",))
-        depth=mis_nc.createVariable("depth", np.float32, ("depth",))
-        lon=mis_nc.createVariable("lon", np.float32, ("lon",))
-        lat=mis_nc.createVariable("lat", np.float32, ("lat",))
-        if transpose:
-            misfchl=mis_nc.createVariable("misfchl", np.float32, ("lon",'lat'))
-            errchl=mis_nc.createVariable("errchl", np.float32, ("lon",'lat'))
-        else:
-            misfchl=mis_nc.createVariable("misfchl", np.float32, ("lat",'lon'))
-            errchl=mis_nc.createVariable("errchl", np.float32, ("lat",'lon'))
-            
-        time._FillValue=settings.fillValue
-        depth._FillValue=settings.fillValue
-        lon._FillValue=settings.fillValue
-        lat._FillValue=settings.fillValue
-        errchl._FillValue=settings.fillValue
-        misfchl._FillValue=settings.fillValue
+        time=mis_nc.createVariable("time", np.float32, ("time",), fill_value=settings.fillValue)
+        depth=mis_nc.createVariable("depth", np.float32, ("depth",), fill_value=settings.fillValue)
+        lon=mis_nc.createVariable("lon", np.float32, ("lon",), fill_value=settings.fillValue)
+        lat=mis_nc.createVariable("lat", np.float32, ("lat",), fill_value=settings.fillValue)
+        misfchl=mis_nc.createVariable("misfchl", np.float32, ("lat",'lon'), fill_value=settings.fillValue)
+        errchl=mis_nc.createVariable("errchl", np.float32, ("lat",'lon'), fill_value=settings.fillValue)
         
         errchl.info='ERRsat read from file: '+settings.var_file
         misfchl.type='chl concentrations'
@@ -73,12 +58,8 @@ def misfit(settings):
         lat[:]=sat_lat
         depth[:]=settings.depth_val
         time[:]=settings.time_val
-        if transpose:
-            misfchl[:]=chl.transpose()
-            errchl[:]=std.transpose()
-        else:
-            misfchl[:]=chl
-            errchl[:]=std
+        misfchl[:]=chl
+        errchl[:]=std
             
     print('misfit done')
         
